@@ -29,7 +29,7 @@ public class CustomNotificationReceiver extends BroadcastReceiver {
 	        heading = jsonObject.getString("alert");
 	        Toast.makeText(context, heading, 3000).show();
 	        try {
-	            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+	            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 	            Ringtone r = RingtoneManager.getRingtone(context, notification);
 	            r.play();
 	        } catch (Exception e) {
@@ -41,8 +41,8 @@ public class CustomNotificationReceiver extends BroadcastReceiver {
 	    NotificationCompat.Builder mBuilder =
 	            new NotificationCompat.Builder(context)
 	            .setSmallIcon(R.drawable.ic_launcher)
-	            .setContentTitle("IIYO")
-	            .setContentText(heading);
+	            .setContentTitle("IIYO - Test")
+	            .setContentText(heading + "done");
 
 	        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 	        mNotificationManager.notify(1, mBuilder.build());
