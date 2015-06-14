@@ -47,7 +47,7 @@ public class CustomNotificationReceiver extends BroadcastReceiver {
 	    }
 	    NotificationCompat.Builder mBuilder =
 	            new NotificationCompat.Builder(context)
-	            .setSmallIcon(R.drawable.ic_launcher)
+	            .setSmallIcon(R.drawable.speak3)
 	            .setContentTitle("IIYO - Test")
 	            .setContentText(heading + "done");
 
