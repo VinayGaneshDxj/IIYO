@@ -19,6 +19,13 @@ import android.widget.Toast;
 public class CustomNotificationReceiver extends BroadcastReceiver {
 	String heading;
 	public void onReceive(Context context, Intent intent) {
+//        Intent i = new Intent();
+//        i.setClassName("com.parse.tutorials.pushnotifications", "com.parse.tutorials.pushnotifications.Message");
+//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        context.startActivity(i);
+//		Intent intentone = new Intent(context.getApplicationContext(), Messsage.class);
+//		intentone.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//		context.startActivity(intentone);
     	String action = intent.getAction();
 		String channel = intent.getExtras().getString("com.parse.Channel");
 		Bundle extras = intent.getExtras();
@@ -29,7 +36,7 @@ public class CustomNotificationReceiver extends BroadcastReceiver {
 	        heading = jsonObject.getString("alert");
 	        Toast.makeText(context, heading, 3000).show();
 	        try {
-	            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+	        	Uri notification = Uri.parse("android.resource://com.parse.tutorials.pushnotifications/" + R.raw.p);
 	            Ringtone r = RingtoneManager.getRingtone(context, notification);
 	            r.play();
 	        } catch (Exception e) {
@@ -46,6 +53,7 @@ public class CustomNotificationReceiver extends BroadcastReceiver {
 
 	        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 	        mNotificationManager.notify(1, mBuilder.build());
+
     }
 
     public static void generateNotification(Context context, int icon, String message) {
@@ -54,6 +62,8 @@ public class CustomNotificationReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification(icon, message, when);
         String title = context.getString(R.string.app_name);
+        
+        
 
     }
 	

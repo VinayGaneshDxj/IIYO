@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -32,6 +34,7 @@ public class MainActivity extends Activity {
 		ParseAnalytics.trackAppOpened(getIntent());
 		
 		// Set up our UI member properties.
+		
 		
 	}
 
