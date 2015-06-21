@@ -10,14 +10,13 @@
     android:background="#F2F5EB"
     tools:context=".MainActivity" >
 
-
-
     <Button
         android:id="@+id/sendIIYO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/button_unpressed" />
+        android:background="@drawable/button_selector"
+        android:text="        IIYO        " />
     
 </RelativeLayout>

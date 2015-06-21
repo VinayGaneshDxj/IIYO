@@ -23,9 +23,10 @@ public final class R {
     public static final class drawable {
         public static final int background=0x7f020000;
         public static final int button_pressed=0x7f020001;
-        public static final int button_unpressed=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int speak3=0x7f020004;
+        public static final int button_selector=0x7f020002;
+        public static final int button_unpressed=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int speak3=0x7f020005;
     }
     public static final class id {
         public static final int action_settings=0x7f090003;
@@ -41,7 +42,9 @@ public final class R {
         public static final int main=0x7f080000;
     }
     public static final class raw {
-        public static final int p=0x7f040000;
+        public static final int dinosor=0x7f040000;
+        public static final int p=0x7f040001;
+        public static final int ponna=0x7f040002;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;

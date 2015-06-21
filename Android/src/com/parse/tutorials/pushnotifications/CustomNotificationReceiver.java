@@ -35,8 +35,14 @@ public class CustomNotificationReceiver extends BroadcastReceiver {
 	        jsonObject = new JSONObject(jsonData);
 	        heading = jsonObject.getString("alert");
 	        Toast.makeText(context, heading, 3000).show();
+	        Uri notification;
 	        try {
-	        	Uri notification = Uri.parse("android.resource://com.parse.tutorials.pushnotifications/" + R.raw.p);
+	        	if(heading.equalsIgnoreCase("p"))
+	        	notification = Uri.parse("android.resource://com.parse.tutorials.pushnotifications/" + R.raw.p);
+	        	else if(heading.equalsIgnoreCase("d"))
+		        	notification = Uri.parse("android.resource://com.parse.tutorials.pushnotifications/" + R.raw.dinosor);
+	        	else
+	        		notification = Uri.parse("android.resource://com.parse.tutorials.pushnotifications/" + R.raw.ponna);
 	            Ringtone r = RingtoneManager.getRingtone(context, notification);
 	            r.play();
 	        } catch (Exception e) {
@@ -49,7 +55,7 @@ public class CustomNotificationReceiver extends BroadcastReceiver {
 	            new NotificationCompat.Builder(context)
 	            .setSmallIcon(R.drawable.speak3)
 	            .setContentTitle("IIYO - Test")
-	            .setContentText(heading + "done");
+	            .setContentText("CU Sent IIYO");
 
 	        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 	        mNotificationManager.notify(1, mBuilder.build());

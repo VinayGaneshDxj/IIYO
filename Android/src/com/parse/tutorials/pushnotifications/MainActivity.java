@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
 			            String name = cursor.getString(nameIdx);
 			            String phoneNumber = cursor.getString(phoneNumberIdx);
 			            if(phoneNumber!=null)
-			            	Log.e("no", phoneNumber);
+			            	PhoneNumber(phoneNumber);
 			        } while (cursor.moveToNext());  
 			    } catch (Exception e) {
 			        e.printStackTrace();
@@ -98,12 +98,17 @@ public class MainActivity extends Activity {
 				ParseQuery query = ParseInstallation.getQuery();
 				query.whereEqualTo("mobile", 123456);
 				ParsePush androidPush = new ParsePush();
-				androidPush.setMessage("I love coding");
+				androidPush.setMessage("m");
 				androidPush.setQuery(query);
 				androidPush.sendInBackground();
 			}
 		});
 		
+	}
+	public void PhoneNumber(String number) {
+		String mobile;
+		mobile = number.replace(" ", "");
+		Log.e("no", mobile.replace("+91", ""));
 	}
 
 }
