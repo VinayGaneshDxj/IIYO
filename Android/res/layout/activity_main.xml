@@ -14,9 +14,21 @@
         android:id="@+id/sendIIYO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="125dp"
         android:background="@drawable/button_selector"
-        android:text="        IIYO        " />
+        android:text="                  IIYO                  " />
+
+    <TextView
+        android:id="@+id/ToBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sendIIYO"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/sendIIYO"
+        android:layout_marginTop="90dp"
+        android:text="TO"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     
 </RelativeLayout>

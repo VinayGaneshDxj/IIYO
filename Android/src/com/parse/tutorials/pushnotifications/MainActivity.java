@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
@@ -16,10 +17,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
@@ -34,7 +39,9 @@ import com.parse.SaveCallback;
 public class MainActivity extends Activity {
 
 	Button sendIIYO;
-	
+	TextView ToBtn;
+	Spinner ToSpinner;
+	String mobileNumber;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,9 +49,30 @@ public class MainActivity extends Activity {
 
 		// Track app opens.
 		ParseAnalytics.trackAppOpened(getIntent());
-		
+//		 Bundle bundel = getIntent().getExtras();
+//		    String to =bundel.getString("to");
+		    
 		// Set up our UI member properties.
+		ToBtn = (TextView) findViewById(R.id.ToBtn);
 		sendIIYO =  (Button) findViewById(R.id.sendIIYO);
+//		if(to)
+//			ToBtn.setText(to);
+//		Intent i = new Intent(MainActivity.this, SelectRecipient.class);
+//		startActivity(i);
+//		ArrayAdapter<String> adapter = null;
+//		adapter.add("Item1");adapter.add("Item2");adapter.add("Item3");adapter.add("Item4");
+//		
+//		ToSpinner.setAdapter(adapter);
+		ToBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				 Intent i = new Intent(MainActivity.this, SelectRecipient.class);
+				 startActivityForResult(i, 1);
+				
+			}
+		});
 		
 		sendIIYO.setOnTouchListener(new OnTouchListener() {
 
@@ -72,31 +100,10 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Cursor cursor = null;
-			    try {
-			        cursor = getApplicationContext().getContentResolver().query(Phone.CONTENT_URI, null, null, null, null);
-			        int contactIdIdx = cursor.getColumnIndex(Phone._ID);
-			        int nameIdx = cursor.getColumnIndex(Phone.DISPLAY_NAME);
-			        int phoneNumberIdx = cursor.getColumnIndex(Phone.NUMBER);
-			        int photoIdIdx = cursor.getColumnIndex(Phone.PHOTO_ID);
-			        cursor.moveToFirst();
-			        do {
-			            String idContact = cursor.getString(contactIdIdx);
-			            String name = cursor.getString(nameIdx);
-			            String phoneNumber = cursor.getString(phoneNumberIdx);
-			            if(phoneNumber!=null)
-			            	PhoneNumber(phoneNumber);
-			        } while (cursor.moveToNext());  
-			    } catch (Exception e) {
-			        e.printStackTrace();
-			    } finally {
-			        if (cursor != null) {
-			            cursor.close();
-			        }
-			    }
+				
 				Toast.makeText(getApplicationContext(), "Button pressed", 3000).show();
 				ParseQuery query = ParseInstallation.getQuery();
-				query.whereEqualTo("mobile", 123456);
+				query.whereEqualTo("mobile", mobileNumber);
 				ParsePush androidPush = new ParsePush();
 				androidPush.setMessage("m");
 				androidPush.setQuery(query);
@@ -105,10 +112,19 @@ public class MainActivity extends Activity {
 		});
 		
 	}
-	public void PhoneNumber(String number) {
-		String mobile;
-		mobile = number.replace(" ", "");
-		Log.e("no", mobile.replace("+91", ""));
-	}
 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+	    if (requestCode == 1) {
+	        if(resultCode == RESULT_OK){
+	            String name=data.getStringExtra("name");
+	            String number=data.getStringExtra("number");
+	            ToBtn.setText(name);
+	            mobileNumber = number;
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }
+	}
 }
